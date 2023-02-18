@@ -2,6 +2,7 @@ package com.example.gregoryspoliceforce.ui
 
 import androidx.lifecycle.ViewModel
 import com.example.gregoryspoliceforce.data.MockDataSource
+import com.example.gregoryspoliceforce.data.PoliceUiState
 import com.example.gregoryspoliceforce.model.Force
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
