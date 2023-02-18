@@ -4,11 +4,12 @@ Gregory's Police app
 Todo List
 ---------------
 1. Create App in Compose
-2. Bring in DI
-3. Migrate MVVM to MVI
-4. Add test coverage
-5. ADD police style logo
-6. ADD dark mode
+2. Migrate common UI to a common UI file
+3. Bring in DI
+4. Migrate MVVM to MVI
+5. Add test coverage
+6. ADD police style logo
+7. ADD dark mode
 
 Current thinking for screens
 --------------

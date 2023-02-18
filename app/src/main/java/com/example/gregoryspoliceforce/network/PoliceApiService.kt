@@ -5,7 +5,7 @@ import retrofit2.http.GET
 
 
 private const val BASE_URL =
-    "https://data.police.uk" //TODO update this
+    "https://data.police.uk/api/"
 
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(ScalarsConverterFactory.create())

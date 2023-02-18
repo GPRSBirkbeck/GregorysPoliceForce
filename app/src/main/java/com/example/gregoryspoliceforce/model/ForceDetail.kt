@@ -1,18 +1,16 @@
 package com.example.gregoryspoliceforce.model
 
-import java.net.URL
-
 data class ForceDetail(
     val description: String,
-    val url: URL,
-    val engagementMethods: List<EngagementMethods>,
+    val url: String, //TODO make URL
+    val engagementMethods: List<EngagementMethod>,
     val telephone: String,
     val id: String,
     val name: String
 )
 
-data class EngagementMethods(
-    val title: String,
-    val url: URL,
+data class EngagementMethod(
+    val title: String, // todo appears optional
+    val url: String, //TODO Make URL
     val description: String
 )

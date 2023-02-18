@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Gregory\'s Police Force</string>
+    <string name="back_button">back</string>
+    <string name="force_detail_screen">ForceListScreen</string>
 </resources>
