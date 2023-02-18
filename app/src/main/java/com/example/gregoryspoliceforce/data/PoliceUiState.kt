@@ -11,7 +11,7 @@ data class PoliceUiState(
 
 //TODO merge these once you've read up on sealed interfaces
 sealed interface PoliceOnlineUiState {
-    data class Success(val onlineForceListAsString: String) : PoliceOnlineUiState
+    data class Success(val onlineForceListAsString: List<Force>) : PoliceOnlineUiState
     object Error : PoliceOnlineUiState
     object Loading : PoliceOnlineUiState
 }

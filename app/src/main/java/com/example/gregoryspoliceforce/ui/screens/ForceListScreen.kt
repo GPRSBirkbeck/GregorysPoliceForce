@@ -35,10 +35,10 @@ import com.example.gregoryspoliceforce.R
 fun ForceListScreen(modifier: Modifier = Modifier, policeUiState: PoliceUiState, policeOnlineUiState: PoliceOnlineUiState, policeViewModel: PoliceViewModel, onPoliceListClick : (String) -> Unit = {})  {
     when (policeOnlineUiState) {
         is PoliceOnlineUiState.Loading -> LoadingScreen(modifier = modifier)
-        is PoliceOnlineUiState.Success -> WelcomeToThePolice(policeOnlineUiState.onlineForceListAsString, "Woohoo", modifier)
+        is PoliceOnlineUiState.Success -> ForceListScreenLayout(forceList = policeOnlineUiState.onlineForceListAsString, onPoliceListClick = onPoliceListClick)
         is PoliceOnlineUiState.Error -> ErrorScreen()
     }
-    ForceListScreenLayout(forceList = policeUiState.forceList, onPoliceListClick = onPoliceListClick)
+    //ForceListScreenLayout(forceList = policeUiState.forceList, onPoliceListClick = onPoliceListClick)
 }
 
 @Composable

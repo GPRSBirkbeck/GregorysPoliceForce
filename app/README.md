@@ -5,12 +5,13 @@ Todo List
 ---------------
 1. Create App in Compose
 2. Extract Strings
-3. Migrate common UI to a common UI file
-4. Bring in DI
-5. Migrate MVVM to MVI
-6. Add test coverage
-7. ADD police style logo
-8. ADD dark mode
+3. WorkManager
+4. Migrate common UI to a common UI file
+5. Bring in DI
+6. Migrate MVVM to MVI
+7. Add test coverage
+8. ADD police style logo
+9. ADD dark mode
 
 Current thinking for screens
 --------------

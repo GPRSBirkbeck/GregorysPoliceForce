@@ -37,15 +37,15 @@ class PoliceViewModel : ViewModel() {
         return MockDataSource().LoadMockPoliceSource()
     }
 
-    private fun getOnlineForceList(): String {
-        var listResult = ""
+    private fun getOnlineForceList(): List<Force> {
+        var listResult: List<Force> = ArrayList<Force>()
         viewModelScope.launch {
             try {
                 //TODO uncomment
 //            val listResult = PoliceApi.retrofitService.getForceList()
 //            _uiState.value = PoliceUiState(onlineForceList = listResult)
 //            Log.d(TAG, "getOnlineForceList: $listResult")
-                listResult = PoliceApi.retrofitService.getForceListAsString()
+                listResult = PoliceApi.retrofitService.getForceList()
                 policeOnlineUiState = PoliceOnlineUiState.Success(onlineForceListAsString = listResult)
                 Log.d(TAG, "getOnlineForceList: $listResult")
 
