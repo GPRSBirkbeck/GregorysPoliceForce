@@ -76,6 +76,8 @@ fun PoliceApp(modifier: Modifier = Modifier, viewModel: PoliceViewModel = viewMo
         }
     ) { innerPadding ->
         val uiState by viewModel.uiState.collectAsState()
+        //val OnlineUiState by viewModel.policeOnlineUiState.collectAsState() //TODO fix?
+
         NavHost(
             navController = navController,
             startDestination = PoliceScreen.Home.name,
@@ -88,7 +90,7 @@ fun PoliceApp(modifier: Modifier = Modifier, viewModel: PoliceViewModel = viewMo
                     Log.d(TAG, "PoliceApp: Police Force set to $it")
                     navController.navigate(PoliceScreen.Detail.name)
                     Log.d(TAG, "PoliceApp: navigation camplete")
-                })
+                }, policeOnlineUiState = viewModel.policeOnlineUiState)
             }
             composable(route = PoliceScreen.Detail.name){
                 val context = LocalContext.current

@@ -2,4 +2,6 @@
     <string name="app_name">Gregory\'s Police Force</string>
     <string name="back_button">back</string>
     <string name="force_detail_screen">ForceListScreen</string>
+    <string name="loading">Loading</string>
+    <string name="loading_failed">Failed to load the Police</string>
 </resources>

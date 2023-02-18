@@ -1,7 +1,10 @@
 package com.example.gregoryspoliceforce.ui.screens
 
+import androidx.compose.ui.Alignment
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -10,21 +13,56 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.gregoryspoliceforce.data.PoliceOnlineUiState
 import com.example.gregoryspoliceforce.data.PoliceUiState
 import com.example.gregoryspoliceforce.model.Force
 import com.example.gregoryspoliceforce.ui.PoliceViewModel
 import com.example.gregoryspoliceforce.ui.theme.GregorysPoliceForceTheme
-
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.Image
+import androidx.compose.ui.res.stringResource
+import com.example.gregoryspoliceforce.R
 
 @Composable
-fun ForceListScreen(modifier: Modifier = Modifier, policeUiState: PoliceUiState, policeViewModel: PoliceViewModel, onPoliceListClick : (String) -> Unit = {})  {
+fun ForceListScreen(modifier: Modifier = Modifier, policeUiState: PoliceUiState, policeOnlineUiState: PoliceOnlineUiState, policeViewModel: PoliceViewModel, onPoliceListClick : (String) -> Unit = {})  {
+    when (policeOnlineUiState) {
+        is PoliceOnlineUiState.Loading -> LoadingScreen(modifier = modifier)
+        is PoliceOnlineUiState.Success -> WelcomeToThePolice(policeOnlineUiState.onlineForceListAsString, "Woohoo", modifier)
+        is PoliceOnlineUiState.Error -> ErrorScreen()
+    }
     ForceListScreenLayout(forceList = policeUiState.forceList, onPoliceListClick = onPoliceListClick)
+}
+
+@Composable
+fun LoadingScreen(modifier: Modifier = Modifier) {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = modifier.fillMaxSize()
+    ) {
+        Image(
+            modifier = Modifier.size(200.dp),
+            painter = painterResource(R.drawable.loading_img),
+            contentDescription = stringResource(R.string.loading)
+        )
+    }
+}
+
+@Composable
+fun ErrorScreen(modifier: Modifier = Modifier) {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = modifier.fillMaxSize()
+    ) {
+        Text(stringResource(R.string.loading_failed))
+    }
 }
 
 @Composable
@@ -32,12 +70,12 @@ fun ForceListScreenLayout(forceList: List<Force>,
                           modifier: Modifier = Modifier,
                           onPoliceListClick : (String) -> Unit ){
     Column {
-        WelcomeToThePolice(
-            name = "Welcome to the Police Yovan.",
-            startText = "Explore the Police with me below!",
-            modifier = modifier.align(Alignment.CenterHorizontally)
-
-        )
+//        WelcomeToThePolice(
+//            name = "Welcome to the Police Yovan.",
+//            startText = "Explore the Police with me below!",
+//            modifier = modifier.align(Alignment.CenterHorizontally)
+//
+//        )
         ForceList(forceList = forceList, onPoliceListClick = onPoliceListClick)
     }
 }
