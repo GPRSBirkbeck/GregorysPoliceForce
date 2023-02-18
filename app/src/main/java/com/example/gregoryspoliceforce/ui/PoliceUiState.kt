@@ -1,6 +1,10 @@
 package com.example.gregoryspoliceforce.ui
 
-data class PoliceUiState(
-    val state: String = "" //TODO see if we noeed this
+import com.example.gregoryspoliceforce.model.Force
 
-)
+data class PoliceUiState(
+    val selectedPoliceForce: String = "", //TODO see if we need this
+    val forceList: List<Force> = ArrayList<Force>()
+
+) {
+}
