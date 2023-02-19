@@ -3,7 +3,6 @@
 
 Todo List
 ---------------
-1. Make Detail Scrollable
 2. Extract Strings
 3. Migrate common UI to a common UI file
 4. tidy up the code: big refactor - ensure you focus on DI

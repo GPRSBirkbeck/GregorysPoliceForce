@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -44,12 +46,12 @@ fun ForceDetailScreen(modifier: Modifier = Modifier, policeUiState: PoliceUiStat
 fun ForceDetailScreenLayout(chosenForce: ForceDetail,
                      modifier: Modifier = Modifier){
     Column {
-        NextStep(
-            name = "YOU DID IT.",
-            startText = "Explore the Police with me below!",
-            modifier = modifier.align(Alignment.CenterHorizontally)
-
-        )
+//        NextStep(
+//            name = "YOU DID IT.",
+//            startText = "Explore the Police with me below!",
+//            modifier = modifier.align(Alignment.CenterHorizontally)
+//
+//        )
         ForceDetailCard(forceDetail = chosenForce)
     }
 }
@@ -70,10 +72,15 @@ fun NextStep(name: String, startText: String, modifier: Modifier = Modifier) {
 
 @Composable
 fun ForceDetailCard(forceDetail: ForceDetail, modifier: Modifier = Modifier) {
-    Card(modifier = modifier.padding(8.dp), elevation = 4.dp) {
+    LazyColumn {
+        item {
+            Card(
+                modifier = modifier
+                    .padding(8.dp), elevation = 4.dp
+            ) {
+                Column {
 
-        Column {
-            //TODO add fun Images
+                    //TODO add fun Images
 //            Image(
 //                painter = painterResource(affirmation.imageResourceId),
 //                contentDescription = stringResource(affirmation.stringResourceId),
@@ -82,50 +89,60 @@ fun ForceDetailCard(forceDetail: ForceDetail, modifier: Modifier = Modifier) {
 //                    .height(194.dp),
 //                contentScale = ContentScale.Crop
 //            )
-            forceDetail.name?.let {
-                Text(text = it,
-                    modifier = Modifier.padding(16.dp),
-                    style = MaterialTheme.typography.h5
-                )
+                    forceDetail.name?.let {
+                        Text(
+                            text = it,
+                            modifier = Modifier.padding(16.dp),
+                            style = MaterialTheme.typography.h5
+                        )
+                    }
+                    forceDetail.telephone?.let {
+                        Text(
+                            text = it,
+                            modifier = Modifier.padding(8.dp),
+                            style = MaterialTheme.typography.h6
+                        )
+                    }
+                    forceDetail.url?.let {
+                        Text(
+                            text = it,
+                            modifier = Modifier.padding(8.dp),
+                            style = MaterialTheme.typography.h6
+                        )
+                    }
+                    forceDetail.description?.let {
+                        Text(
+                            text = HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_LEGACY)
+                                .toString(),
+                            modifier = Modifier.padding(8.dp),
+                            style = MaterialTheme.typography.body1
+                        )
+                    }
+
+
+                }
             }
-            forceDetail.telephone?.let {
-                Text(text = it,
-                    modifier = Modifier.padding(8.dp),
-                    style = MaterialTheme.typography.h6
-                )
-            }
-            forceDetail.url?.let {
-                Text(text = it,
-                    modifier = Modifier.padding(8.dp),
-                    style = MaterialTheme.typography.h6
-                )
-            }
-            forceDetail.description?.let {
-                Text(text = HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_LEGACY).toString(),
-                    modifier = Modifier.padding(8.dp),
-                    style = MaterialTheme.typography.body1
-                )
-            }
-            Text(text = "Engagement methods",
+            Text(
+                text = "Engagement methods",
                 modifier = Modifier.padding(8.dp),
                 style = MaterialTheme.typography.h6
             )
-            LazyColumn{
-                items(forceDetail.engagementMethods){
-                        method ->
-                            if(method.url!=null){
-                                EngagementCard(engagementMethod = method)
-                            }
+        }
+            items(forceDetail.engagementMethods) { method ->
+                if (method.url != null) {
+                    EngagementCard(engagementMethod = method)
                 }
             }
         }
-    }
+
+
 }
 
 @Composable
 fun EngagementCard(engagementMethod: EngagementMethod, modifier: Modifier = Modifier) {
     Card(modifier = modifier
         .padding(8.dp), elevation = 4.dp) {
+
         Column {
             engagementMethod.title?.let {
                 Text(text = it,
