@@ -15,12 +15,15 @@ Todo List
 10. Add test coverage
 11. ADD police style logo
 12. ADD dark mode
+13. If we do the "find officer X game", then we should be able to hide items we've seen by marking them as read
+14. Bonus feature: add search bap
 
 Current thinking for screens
 --------------
 Screen 1: List of Forces  - add star wars photos to these?
 Screen 2: Specific Force
-Screen 3: Senior Officers?
+Screen 3: Senior Officers? - once you identify the person - go back to main screen
+
 
 Notes/Reminders
 ---------------
