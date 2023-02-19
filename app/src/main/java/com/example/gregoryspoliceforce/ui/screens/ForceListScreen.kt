@@ -27,6 +27,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.Image
 import androidx.compose.ui.res.stringResource
 import com.example.gregoryspoliceforce.R
+import com.example.gregoryspoliceforce.ui.components.ErrorScreen
+import com.example.gregoryspoliceforce.ui.components.LoadingScreen
 
 @Composable
 fun ForceListScreen(modifier: Modifier = Modifier, policeUiState: PoliceUiState, policeOnlineUiState: PoliceOnlineUiState, policeViewModel: PoliceViewModel, onPoliceListClick : (String) -> Unit = {})  {
@@ -35,60 +37,13 @@ fun ForceListScreen(modifier: Modifier = Modifier, policeUiState: PoliceUiState,
         is PoliceOnlineUiState.Success -> ForceListScreenLayout(forceList = policeOnlineUiState.onlineForceList, onPoliceListClick = onPoliceListClick)
         is PoliceOnlineUiState.Error -> ErrorScreen()
     }
-    //ForceListScreenLayout(forceList = policeUiState.forceList, onPoliceListClick = onPoliceListClick)
-}
-
-@Composable
-fun LoadingScreen(modifier: Modifier = Modifier) {
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = modifier.fillMaxSize()
-    ) {
-        Image(
-            modifier = Modifier.size(200.dp),
-            painter = painterResource(R.drawable.loading_img),
-            contentDescription = stringResource(R.string.loading)
-        )
-    }
-}
-
-@Composable
-fun ErrorScreen(modifier: Modifier = Modifier) {
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = modifier.fillMaxSize()
-    ) {
-        Text(stringResource(R.string.loading_failed))
-    }
 }
 
 @Composable
 fun ForceListScreenLayout(forceList: List<Force>,
                           modifier: Modifier = Modifier,
                           onPoliceListClick : (String) -> Unit ){
-    Column {
-//        WelcomeToThePolice(
-//            name = "Welcome to the Police Yovan.",
-//            startText = "Explore the Police with me below!",
-//            modifier = modifier.align(Alignment.CenterHorizontally)
-//
-//        )
         ForceList(forceList = forceList, onPoliceListClick = onPoliceListClick)
-    }
-}
-
-@Composable
-fun WelcomeToThePolice(name: String, startText: String, modifier: Modifier = Modifier) {
-    Column {
-        Text(
-            text = name,
-            fontSize = 36.sp
-        )
-        Text(
-            text = startText,
-            fontSize = 24.sp
-        )
-    }
 }
 
 @Composable
@@ -128,21 +83,3 @@ private fun ForceList(forceList: List<Force>, modifier: Modifier = Modifier, onP
             }
     }
 }
-
-
-@Preview(showBackground = true)
-@Composable
-fun PolicePreview() {
-    GregorysPoliceForceTheme {
-        WelcomeToThePolice(name = "Yovan", startText = "Let's start exploring the Police Database")
-    }
-}
-
-//@Preview
-//@Composable
-//private fun ForceCardPreview(onPoliceListClick : (String) -> Unit ) {
-//    ForceCard(force = Force("london-test", "London's Test Force"), onPoliceListClick = onPoliceListClick)
-//}
-//TODO fix?
-
-// TODO Remove note: The composable function must provide default values for any parameters to preview it. For this reason, you can't preview the Greeting() function directly. Instead, you need to add another function, the BirthdayCardPreview() function in this case, that calls the Greeting() function with an appropriate parameter.

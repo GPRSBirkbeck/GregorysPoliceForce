@@ -30,6 +30,8 @@ import com.example.gregoryspoliceforce.model.EngagementMethod
 import com.example.gregoryspoliceforce.model.Force
 import com.example.gregoryspoliceforce.model.ForceDetail
 import com.example.gregoryspoliceforce.ui.PoliceViewModel
+import com.example.gregoryspoliceforce.ui.components.ErrorScreen
+import com.example.gregoryspoliceforce.ui.components.LoadingScreen
 import com.example.gregoryspoliceforce.ui.theme.GregorysPoliceForceTheme
 
 @Composable
@@ -39,28 +41,12 @@ fun ForceDetailScreen(modifier: Modifier = Modifier, policeUiState: PoliceUiStat
         is DetailPoliceOnlineUiState.Success -> ForceDetailScreenLayout(chosenForce = detailPoliceOnlineUiState.onlineForceDetail)
         is DetailPoliceOnlineUiState.Error -> ErrorScreen()
     }
-
-    //ForceDetailScreenLayout(forceList = policeUiState.forceList, onPoliceListClick = {policeViewModel.setPoliceForce("Cambridge")})
 }
 
 @Composable
 fun ForceDetailScreenLayout(chosenForce: ForceDetail,
                      modifier: Modifier = Modifier){
         ForceDetailCard(forceDetail = chosenForce)
-}
-
-@Composable
-fun NextStep(name: String, startText: String, modifier: Modifier = Modifier) {
-    Column {
-        Text(
-            text = name,
-            fontSize = 36.sp
-        )
-        Text(
-            text = startText,
-            fontSize = 24.sp
-        )
-    }
 }
 
 @Composable
@@ -72,16 +58,6 @@ fun ForceDetailCard(forceDetail: ForceDetail, modifier: Modifier = Modifier) {
                     .padding(8.dp), elevation = 4.dp
             ) {
                 Column {
-
-                    //TODO add fun Images
-//            Image(
-//                painter = painterResource(affirmation.imageResourceId),
-//                contentDescription = stringResource(affirmation.stringResourceId),
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .height(194.dp),
-//                contentScale = ContentScale.Crop
-//            )
                     forceDetail.name?.let {
                         Text(
                             text = it,
@@ -111,8 +87,6 @@ fun ForceDetailCard(forceDetail: ForceDetail, modifier: Modifier = Modifier) {
                             style = MaterialTheme.typography.body1
                         )
                     }
-
-
                 }
             }
             Text(
@@ -127,8 +101,6 @@ fun ForceDetailCard(forceDetail: ForceDetail, modifier: Modifier = Modifier) {
                 }
             }
         }
-
-
 }
 
 @Composable
@@ -160,32 +132,7 @@ fun EngagementCard(engagementMethod: EngagementMethod, modifier: Modifier = Modi
                     )
 
                 }
-                }
             }
-
-            }
-}
-
-@Composable
-private fun ForceList(forceList: List<Force>, modifier: Modifier = Modifier, onPoliceListClick : (String) -> Unit ){
-    LazyColumn{
-        items(forceList){
-                force -> ForceCard(force = force, onPoliceListClick = onPoliceListClick)
         }
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun NextStep() {
-    GregorysPoliceForceTheme {
-        WelcomeToThePolice(name = "Yovan", startText = "Let's start exploring the Police Database")
-    }
-}
-
-//@Preview
-//@Composable
-//private fun ForceCardPreview() {
-//    ForceCard(force = Force("london-test", "London's Test Force"))
-//}
-//TODO fix
