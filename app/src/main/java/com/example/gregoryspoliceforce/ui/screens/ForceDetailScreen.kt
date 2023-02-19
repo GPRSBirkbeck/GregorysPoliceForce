@@ -5,13 +5,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.text.ClickableText
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -66,7 +68,7 @@ fun NextStep(name: String, startText: String, modifier: Modifier = Modifier) {
 
 @Composable
 fun ForceDetailCard(forceDetail: ForceDetail, modifier: Modifier = Modifier) {
-    Card(modifier = modifier.padding(8.dp).clickable {  }, elevation = 4.dp) {
+    Card(modifier = modifier.padding(8.dp), elevation = 4.dp) {
 
         Column {
             //TODO add fun Images
@@ -123,44 +125,33 @@ fun EngagementCard(engagementMethod: EngagementMethod, modifier: Modifier = Modi
     Card(modifier = modifier
         .padding(8.dp), elevation = 4.dp) {
         Column {
-            //TODO add fun Images
-//            Image(
-//                painter = painterResource(affirmation.imageResourceId),
-//                contentDescription = stringResource(affirmation.stringResourceId),
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .height(194.dp),
-//                contentScale = ContentScale.Crop
-//            )
             engagementMethod.title?.let {
                 Text(text = it,
                     modifier = Modifier.padding(2.dp),
                     style = MaterialTheme.typography.body1
                 )
-                //removing as no need for type
             }
-//            engagementMethod.type?.let {
-//                Text(text = it,
-//                    modifier = Modifier.padding(2.dp),
-//                    style = MaterialTheme.typography.body2
-//                )
-//            }
             engagementMethod.description?.let {
                 Text(text = it,
                     modifier = Modifier.padding(2.dp),
-                    style = MaterialTheme.typography.subtitle2
+                    style = MaterialTheme.typography.subtitle2,
                 )
             }
+            val uriHandler = LocalUriHandler.current
             engagementMethod.url?.let {
-                Text(text = it,
-                    modifier = Modifier.padding(2.dp),
-                    style = MaterialTheme.typography.subtitle2
-                )
+                TextButton(onClick = { uriHandler.openUri(it) }) {
+                    Text(
+                        text = it,
+                        modifier = Modifier.padding(2.dp),
+                        style = MaterialTheme.typography.subtitle2,
+                        color = Color.Blue
+                    )
+
+                }
+                }
             }
 
             }
-
-        }
 }
 
 @Composable
