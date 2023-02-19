@@ -18,8 +18,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.rememberNavController
 import com.example.gregoryspoliceforce.ui.PoliceViewModel
 import com.example.gregoryspoliceforce.ui.screens.ForceDetailScreen
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.gregoryspoliceforce.ui.screens.ForceListScreen
 
@@ -28,6 +26,7 @@ enum class PoliceScreen(@StringRes val title: Int) {
     Detail(title = R.string.force_detail_screen)
     //TODO add officers?
 }
+
 /**
  * Composable that displays the topBar and displays back button if back navigation is possible.
  */
@@ -55,14 +54,11 @@ fun PoliceAppBar(
 }
 
 @Composable
-fun PoliceApp( viewModel: PoliceViewModel, modifier: Modifier = Modifier) {
-    // TODO: Create NavController
+fun PoliceApp(viewModel: PoliceViewModel, modifier: Modifier = Modifier) {
     val navController = rememberNavController()
 
-    // TODO: Get current back stack entry
     val backStackEntry by navController.currentBackStackEntryAsState()
 
-    // TODO: Get the name of the current screen
     val currentScreen = PoliceScreen.valueOf(
         backStackEntry?.destination?.route ?: PoliceScreen.Home.name
     )
@@ -71,33 +67,31 @@ fun PoliceApp( viewModel: PoliceViewModel, modifier: Modifier = Modifier) {
             PoliceAppBar(
                 currentScreen = currentScreen,
                 canNavigateBack = navController.previousBackStackEntry != null,
-                navigateUp = { navController.navigateUp()}
+                navigateUp = { navController.navigateUp() }
             )
         }
     ) { innerPadding ->
-        val uiState by viewModel.uiState.collectAsState()
-        //val OnlineUiState by viewModel.policeOnlineUiState.collectAsState() //TODO fix?
 
         NavHost(
             navController = navController,
             startDestination = PoliceScreen.Home.name,
             modifier = modifier.padding(innerPadding)
         ) {
-            composable(route = PoliceScreen.Home.name){
-                ForceListScreen(policeUiState = uiState, policeViewModel = viewModel,
-                onPoliceListClick = {
-                    viewModel.setPoliceForce(it) //TODO as we do this here - remove logic from ForceListScreen?
-                    Log.d(TAG, "PoliceApp: Police Force set to $it")
-
-                    navController.navigate(PoliceScreen.Detail.name)
-                }, policeOnlineUiState = viewModel.policeOnlineUiState)
+            composable(route = PoliceScreen.Home.name) {
+                ForceListScreen(
+                    onPoliceListClick = {
+                        viewModel.setPoliceForce(it)
+                        Log.d(TAG, "PoliceApp: Police Force set to $it")
+                        navController.navigate(PoliceScreen.Detail.name)
+                    }, forceListUiState = viewModel.forceListUiState
+                )
             }
-            composable(route = PoliceScreen.Detail.name){
+            composable(route = PoliceScreen.Detail.name) {
                 val context = LocalContext.current
-                ForceDetailScreen(policeUiState = uiState, policeViewModel = viewModel, detailPoliceOnlineUiState = viewModel.detailPoliceOnlineUiState)
+                ForceDetailScreen(
+                    forceDetailUiState = viewModel.forceDetailUiState
+                )
             }
         }
-
-        // TODO: add NavHost
     }
 }

@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ForceDetail(
     val description: String? = null,
-    val url: String? = null, //TODO make URL
+    val url: String? = null,
     @SerialName(value = "engagement_methods")
     val engagementMethods: List<EngagementMethod>,
     val telephone: String? = null,
@@ -15,8 +15,8 @@ data class ForceDetail(
 
 @Serializable
 data class EngagementMethod(
-    val title: String? = null, // todo appears optional
-    val url: String? = null, //TODO Make URL
+    val title: String? = null,
+    val url: String? = null,
     val description: String? = null,
     val type: String? = null,
 )

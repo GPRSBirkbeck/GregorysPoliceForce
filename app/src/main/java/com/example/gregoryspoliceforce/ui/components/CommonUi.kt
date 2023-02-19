@@ -13,26 +13,26 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.gregoryspoliceforce.R
 
-    @Composable
-    fun LoadingScreen(modifier: Modifier = Modifier) {
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = modifier.fillMaxSize()
-        ) {
-            Image(
-                modifier = Modifier.size(200.dp),
-                painter = painterResource(R.drawable.loading_img),
-                contentDescription = stringResource(R.string.loading)
-            )
-        }
+@Composable
+fun LoadingScreen(modifier: Modifier = Modifier) {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = modifier.fillMaxSize()
+    ) {
+        Image(
+            modifier = Modifier.size(200.dp),
+            painter = painterResource(R.drawable.loading_img),
+            contentDescription = stringResource(R.string.loading)
+        )
     }
+}
 
-    @Composable
-    fun ErrorScreen(modifier: Modifier = Modifier) {
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = modifier.fillMaxSize()
-        ) {
-            Text(stringResource(R.string.loading_failed))
-        }
+@Composable
+fun ErrorScreen(modifier: Modifier = Modifier) {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = modifier.fillMaxSize()
+    ) {
+        Text(stringResource(R.string.loading_failed))
     }
+}

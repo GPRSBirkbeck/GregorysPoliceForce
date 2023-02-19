@@ -6,15 +6,17 @@ import retrofit2.Retrofit
 import retrofit2.http.GET
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Provides
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType
 import retrofit2.http.Path
 import retrofit2.http.Query
 import javax.inject.Inject
 
-private val BASE_URL =
+private const val BASE_URL =
     "https://data.police.uk/api/"
 
+@OptIn(ExperimentalSerializationApi::class)
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(Json.asConverterFactory(MediaType.get("application/json")))
     .baseUrl(BASE_URL)
