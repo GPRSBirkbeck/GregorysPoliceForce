@@ -51,7 +51,7 @@ class PoliceViewModel(private val policeRepository: PoliceRepository) : ViewMode
     private fun getSpecificOnlineForce() {
         viewModelScope.launch {
             try {
-                val forceDetail = policeRepository.getSpecificForce()
+                val forceDetail = policeRepository.getSpecificForce(selectedPoliceForce)
                 detailPoliceOnlineUiState = DetailPoliceOnlineUiState.Success(onlineForceDetail = forceDetail)
                 Log.d(TAG, "getOnlineForceDetail: $detailPoliceOnlineUiState")
 

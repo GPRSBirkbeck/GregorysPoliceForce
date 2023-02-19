@@ -6,13 +6,14 @@ import retrofit2.http.GET
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType
-
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 interface PoliceApiService {
     @GET("forces")
     suspend fun getForceList(): List<Force>
 
-    @GET("forces/leicestershire")
-    suspend fun getSpecificForce(): ForceDetail
+    @GET("forces/{id}")
+    suspend fun getSpecificForce(@Path("id") id: String): ForceDetail
 }

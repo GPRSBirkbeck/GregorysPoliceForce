@@ -1,6 +1,8 @@
 package com.example.gregoryspoliceforce.data
 
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.gregoryspoliceforce.network.PoliceApiService
+import com.example.gregoryspoliceforce.ui.PoliceViewModel
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType
@@ -8,6 +10,7 @@ import retrofit2.Retrofit
 
 interface AppContainer {
     val policeRepository: PoliceRepository
+//    val policeViewModel: PoliceViewModel
 }
 
 class DefaultAppContainer : AppContainer {
@@ -27,4 +30,7 @@ class DefaultAppContainer : AppContainer {
     override val policeRepository: PoliceRepository by lazy {
         DefaultPoliceRepository(retrofitService)
     }
+//
+//    override val policeViewModel: PoliceViewModel =
+//            viewModel(factory = PoliceViewModel.Factory)
 }

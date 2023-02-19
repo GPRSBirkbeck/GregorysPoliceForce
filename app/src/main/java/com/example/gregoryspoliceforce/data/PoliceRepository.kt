@@ -6,7 +6,7 @@ import com.example.gregoryspoliceforce.network.PoliceApiService
 
 interface PoliceRepository {
     suspend fun getForceList(): List<Force>
-    suspend fun getSpecificForce(): ForceDetail
+    suspend fun getSpecificForce(id: String): ForceDetail
 }
 
 class DefaultPoliceRepository(private val policeApiService: PoliceApiService
@@ -15,8 +15,8 @@ class DefaultPoliceRepository(private val policeApiService: PoliceApiService
         return policeApiService.getForceList()
     }
 
-    override suspend fun getSpecificForce(): ForceDetail {
-        return policeApiService.getSpecificForce()
+    override suspend fun getSpecificForce(id: String): ForceDetail {
+        return policeApiService.getSpecificForce(id = id)
     }
 
 }
