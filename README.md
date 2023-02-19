@@ -3,8 +3,8 @@
 
 Todo List
 ---------------
-1. Create App in Compose 
-2. DI with Hilt
+1. DI with Hilt
+2. Unit  & UI tests
 3. if there's no value for an engagement method, hide it
 4. make method links clickable
 5. Extract Strings
