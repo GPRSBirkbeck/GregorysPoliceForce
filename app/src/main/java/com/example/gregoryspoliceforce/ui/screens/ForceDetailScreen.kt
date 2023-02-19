@@ -108,7 +108,10 @@ fun ForceDetailCard(forceDetail: ForceDetail, modifier: Modifier = Modifier) {
             )
             LazyColumn{
                 items(forceDetail.engagementMethods){
-                        method -> EngagementCard(engagementMethod = method)
+                        method ->
+                            if(method.url!=null){
+                                EngagementCard(engagementMethod = method)
+                            }
                 }
             }
         }
@@ -134,13 +137,14 @@ fun EngagementCard(engagementMethod: EngagementMethod, modifier: Modifier = Modi
                     modifier = Modifier.padding(2.dp),
                     style = MaterialTheme.typography.body1
                 )
+                //removing as no need for type
             }
-            engagementMethod.type?.let {
-                Text(text = it,
-                    modifier = Modifier.padding(2.dp),
-                    style = MaterialTheme.typography.body2
-                )
-            }
+//            engagementMethod.type?.let {
+//                Text(text = it,
+//                    modifier = Modifier.padding(2.dp),
+//                    style = MaterialTheme.typography.body2
+//                )
+//            }
             engagementMethod.description?.let {
                 Text(text = it,
                     modifier = Modifier.padding(2.dp),
