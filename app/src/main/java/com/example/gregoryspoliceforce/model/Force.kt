@@ -3,6 +3,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Force(
-    val id: String,
-    val name: String
+    val id: String? = null,
+    val name: String? = null,
 )

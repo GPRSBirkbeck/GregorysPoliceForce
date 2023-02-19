@@ -1,6 +1,7 @@
 package com.example.gregoryspoliceforce.data
 
 import com.example.gregoryspoliceforce.model.Force
+import com.example.gregoryspoliceforce.model.ForceDetail
 
 data class PoliceUiState(
     val selectedPoliceForce: String = "", //TODO see if we need this
@@ -11,7 +12,13 @@ data class PoliceUiState(
 
 //TODO merge these once you've read up on sealed interfaces
 sealed interface PoliceOnlineUiState {
-    data class Success(val onlineForceListAsString: List<Force>) : PoliceOnlineUiState
+    data class Success(val onlineForceList: List<Force>) : PoliceOnlineUiState
     object Error : PoliceOnlineUiState
     object Loading : PoliceOnlineUiState
+}
+
+sealed interface DetailPoliceOnlineUiState {
+    data class Success(val onlineForceDetail: ForceDetail) : DetailPoliceOnlineUiState
+    object Error : DetailPoliceOnlineUiState
+    object Loading : DetailPoliceOnlineUiState
 }

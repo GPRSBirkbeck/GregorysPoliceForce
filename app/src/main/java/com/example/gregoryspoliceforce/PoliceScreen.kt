@@ -88,13 +88,13 @@ fun PoliceApp(modifier: Modifier = Modifier, viewModel: PoliceViewModel = viewMo
                 onPoliceListClick = {
                     viewModel.setPoliceForce(it) //TODO as we do this here - remove logic from ForceListScreen?
                     Log.d(TAG, "PoliceApp: Police Force set to $it")
+
                     navController.navigate(PoliceScreen.Detail.name)
-                    Log.d(TAG, "PoliceApp: navigation camplete")
                 }, policeOnlineUiState = viewModel.policeOnlineUiState)
             }
             composable(route = PoliceScreen.Detail.name){
                 val context = LocalContext.current
-                ForceDetailScreen(policeUiState = uiState, policeViewModel = viewModel)
+                ForceDetailScreen(policeUiState = uiState, policeViewModel = viewModel, detailPoliceOnlineUiState = viewModel.detailPoliceOnlineUiState)
             }
         }
 

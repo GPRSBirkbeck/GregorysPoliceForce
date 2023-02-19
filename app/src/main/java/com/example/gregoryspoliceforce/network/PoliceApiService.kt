@@ -1,5 +1,6 @@
 package com.example.gregoryspoliceforce.network
 import com.example.gregoryspoliceforce.model.Force
+import com.example.gregoryspoliceforce.model.ForceDetail
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -17,6 +18,9 @@ private val retrofit = Retrofit.Builder()
 interface PoliceApiService {
     @GET("forces")
     suspend fun getForceList(): List<Force>
+
+    @GET("forces/leicestershire")
+    suspend fun getSpecificForce(): ForceDetail
 }
 
 object PoliceApi { //TODO replace with DI instead of singleton

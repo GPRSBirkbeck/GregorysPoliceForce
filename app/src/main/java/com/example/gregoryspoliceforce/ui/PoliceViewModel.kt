@@ -7,12 +7,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.gregoryspoliceforce.data.DetailPoliceOnlineUiState
 import com.example.gregoryspoliceforce.data.MockDataSource
 import com.example.gregoryspoliceforce.data.PoliceOnlineUiState
 import com.example.gregoryspoliceforce.data.PoliceUiState
 import com.example.gregoryspoliceforce.model.Force
+import com.example.gregoryspoliceforce.model.ForceDetail
 import com.example.gregoryspoliceforce.network.PoliceApi
-import com.example.gregoryspoliceforce.network.PoliceApiService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -27,6 +28,8 @@ class PoliceViewModel : ViewModel() {
 
     val uiState: StateFlow<PoliceUiState> = _uiState.asStateFlow()
     var policeOnlineUiState: PoliceOnlineUiState by mutableStateOf(PoliceOnlineUiState.Loading)
+        private set
+    var detailPoliceOnlineUiState: DetailPoliceOnlineUiState by mutableStateOf(DetailPoliceOnlineUiState.Loading)
         private set
     private lateinit var selectedPoliceForce: String
 
@@ -46,7 +49,7 @@ class PoliceViewModel : ViewModel() {
 //            _uiState.value = PoliceUiState(onlineForceList = listResult)
 //            Log.d(TAG, "getOnlineForceList: $listResult")
                 listResult = PoliceApi.retrofitService.getForceList()
-                policeOnlineUiState = PoliceOnlineUiState.Success(onlineForceListAsString = listResult)
+                policeOnlineUiState = PoliceOnlineUiState.Success(onlineForceList = listResult)
                 Log.d(TAG, "getOnlineForceList: $listResult")
 
             } catch (e: IOException) {
@@ -57,8 +60,27 @@ class PoliceViewModel : ViewModel() {
         return listResult
     }
 
+    private fun getSpecificOnlineForce() {
+        viewModelScope.launch {
+            try {
+                //TODO uncomment
+//            val listResult = PoliceApi.retrofitService.getForceList()
+//            _uiState.value = PoliceUiState(onlineForceList = listResult)
+//            Log.d(TAG, "getOnlineForceList: $listResult")
+                val forceDetail = PoliceApi.retrofitService.getSpecificForce()
+                detailPoliceOnlineUiState = DetailPoliceOnlineUiState.Success(onlineForceDetail = forceDetail)
+                Log.d(TAG, "getOnlineForceDetail: $detailPoliceOnlineUiState")
+
+            } catch (e: IOException) {
+                policeOnlineUiState = PoliceOnlineUiState.Error
+
+            }
+        }
+    }
+
     fun setPoliceForce(force: String){
         selectedPoliceForce = force
+        getSpecificOnlineForce()
     }
     init {
         _uiState.value = PoliceUiState(forceList = getForceList())
