@@ -4,16 +4,16 @@ Gregory's Police app
 Todo List
 ---------------
 1. Create App in Compose
-2. add a repo between client and VM?
-3. if there's no value for an engagement method, hide it
-4. Extract Strings
-5. WorkManager
-6. Migrate common UI to a common UI file
-7. Bring in DI
-8. Migrate MVVM to MVI
-9. Add test coverage
-10. ADD police style logo
-11. ADD dark mode
+3. Bring in DI
+4. if there's no value for an engagement method, hide it
+5. make method links clickable
+6. Extract Strings
+7. WorkManager
+8. Migrate common UI to a common UI file
+9. Migrate MVVM to MVI
+10. Add test coverage
+11. ADD police style logo
+12. ADD dark mode
 
 Current thinking for screens
 --------------

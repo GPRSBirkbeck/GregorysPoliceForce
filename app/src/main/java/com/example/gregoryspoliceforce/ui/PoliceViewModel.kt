@@ -7,10 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.gregoryspoliceforce.data.DetailPoliceOnlineUiState
-import com.example.gregoryspoliceforce.data.MockDataSource
-import com.example.gregoryspoliceforce.data.PoliceOnlineUiState
-import com.example.gregoryspoliceforce.data.PoliceUiState
+import com.example.gregoryspoliceforce.data.*
 import com.example.gregoryspoliceforce.model.Force
 import com.example.gregoryspoliceforce.model.ForceDetail
 import com.example.gregoryspoliceforce.network.PoliceApi
@@ -35,20 +32,17 @@ class PoliceViewModel : ViewModel() {
 
     private lateinit var forceList: List<Force>
 
-    private fun getForceList(): List<Force> {
-        forceList = MockDataSource().LoadMockPoliceSource()
-        return MockDataSource().LoadMockPoliceSource()
-    }
+//    private fun getForceList(): List<Force> {
+//        forceList = MockDataSource().LoadMockPoliceSource()
+//        return MockDataSource().LoadMockPoliceSource()
+//    }
 
     private fun getOnlineForceList(): List<Force> {
         var listResult: List<Force> = ArrayList<Force>()
         viewModelScope.launch {
             try {
-                //TODO uncomment
-//            val listResult = PoliceApi.retrofitService.getForceList()
-//            _uiState.value = PoliceUiState(onlineForceList = listResult)
-//            Log.d(TAG, "getOnlineForceList: $listResult")
-                listResult = PoliceApi.retrofitService.getForceList()
+                val policeRepoitory = DefaultPoliceRepository()
+                listResult = policeRepoitory.getForceList()
                 policeOnlineUiState = PoliceOnlineUiState.Success(onlineForceList = listResult)
                 Log.d(TAG, "getOnlineForceList: $listResult")
 
@@ -67,7 +61,8 @@ class PoliceViewModel : ViewModel() {
 //            val listResult = PoliceApi.retrofitService.getForceList()
 //            _uiState.value = PoliceUiState(onlineForceList = listResult)
 //            Log.d(TAG, "getOnlineForceList: $listResult")
-                val forceDetail = PoliceApi.retrofitService.getSpecificForce()
+                val policeRepoitory = DefaultPoliceRepository()
+                val forceDetail = policeRepoitory.getSpecificForce()
                 detailPoliceOnlineUiState = DetailPoliceOnlineUiState.Success(onlineForceDetail = forceDetail)
                 Log.d(TAG, "getOnlineForceDetail: $detailPoliceOnlineUiState")
 
@@ -83,7 +78,7 @@ class PoliceViewModel : ViewModel() {
         getSpecificOnlineForce()
     }
     init {
-        _uiState.value = PoliceUiState(forceList = getForceList())
+        //_uiState.value = PoliceUiState(forceList = getForceList())
         //TODO setup a reset block see part 5: https://developer.android.com/codelabs/basic-android-kotlin-compose-viewmodel-and-state?continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-compose-unit-4-pathway-1%23codelab-https%3A%2F%2Fdeveloper.android.com%2Fcodelabs%2Fbasic-android-kotlin-compose-viewmodel-and-state#4
         // resetScreen
         getOnlineForceList()
