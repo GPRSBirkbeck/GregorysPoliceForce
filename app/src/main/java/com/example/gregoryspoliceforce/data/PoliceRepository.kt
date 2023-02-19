@@ -2,21 +2,23 @@ package com.example.gregoryspoliceforce.data
 
 import com.example.gregoryspoliceforce.model.Force
 import com.example.gregoryspoliceforce.model.ForceDetail
+import com.example.gregoryspoliceforce.network.PoliceApi
 import com.example.gregoryspoliceforce.network.PoliceApiService
+import javax.inject.Inject
+import javax.inject.Singleton
 
 interface PoliceRepository {
     suspend fun getForceList(): List<Force>
     suspend fun getSpecificForce(id: String): ForceDetail
 }
 
-class DefaultPoliceRepository(private val policeApiService: PoliceApiService
+class DefaultPoliceRepository @Inject constructor(private val policeApi: PoliceApi
 ) : PoliceRepository {
     override suspend fun getForceList(): List<Force> {
-        return policeApiService.getForceList()
+        return policeApi.retrofitService.getForceList()
     }
 
     override suspend fun getSpecificForce(id: String): ForceDetail {
-        return policeApiService.getSpecificForce(id = id)
+        return policeApi.retrofitService.getSpecificForce(id = id)
     }
-
 }

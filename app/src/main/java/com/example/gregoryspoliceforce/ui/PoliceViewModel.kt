@@ -13,15 +13,19 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.gregoryspoliceforce.GregorysPoliceForceApplication
 import com.example.gregoryspoliceforce.data.*
+import com.example.gregoryspoliceforce.di.PoliceRepositoryModule
 import com.example.gregoryspoliceforce.model.Force
 import com.example.gregoryspoliceforce.model.ForceDetail
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.io.IOException
+import javax.inject.Inject
 
-class PoliceViewModel(private val policeRepository: PoliceRepository) : ViewModel() {
+@HiltViewModel
+class PoliceViewModel @Inject constructor(private val policeRepository: PoliceRepository) : ViewModel() {
 
     private val _uiState = MutableStateFlow(PoliceUiState())
 
@@ -73,13 +77,13 @@ class PoliceViewModel(private val policeRepository: PoliceRepository) : ViewMode
         getOnlineForceList()
     }
 
-    companion object {
-        val Factory: ViewModelProvider.Factory = viewModelFactory {
-            initializer {
-                val application = (this[APPLICATION_KEY] as GregorysPoliceForceApplication)
-                val policeRepository = application.container.policeRepository
-                PoliceViewModel(policeRepository = policeRepository)
-            }
-        }
-    }
+//    companion object {
+//        val Factory: ViewModelProvider.Factory = viewModelFactory {
+//            initializer {
+//                val application = (this[APPLICATION_KEY] as GregorysPoliceForceApplication)
+//                val policeRepository = application.container.policeRepository
+//                PoliceViewModel(policeRepository = policeRepository)
+//            }
+//        }
+//    }
 }

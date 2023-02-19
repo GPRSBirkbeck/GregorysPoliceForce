@@ -3,6 +3,10 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     //serialize JSON
     id 'org.jetbrains.kotlin.plugin.serialization' version '1.7.10'
+
+    //DI with Hilt
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
@@ -83,4 +87,11 @@ dependencies {
     // Kotlin serialization
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0"
 
+    //Hilt
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-compiler:2.44"
+}
+// Allow references to generated code
+kapt {
+    correctErrorTypes true
 }

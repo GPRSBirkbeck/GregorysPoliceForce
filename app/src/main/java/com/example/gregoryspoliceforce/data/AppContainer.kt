@@ -9,7 +9,7 @@ import okhttp3.MediaType
 import retrofit2.Retrofit
 
 interface AppContainer {
-    val policeRepository: PoliceRepository
+    //val policeRepository: PoliceRepository
 //    val policeViewModel: PoliceViewModel
 }
 
@@ -27,9 +27,9 @@ class DefaultAppContainer : AppContainer {
         retrofit.create(PoliceApiService::class.java)
 
     }
-    override val policeRepository: PoliceRepository by lazy {
-        DefaultPoliceRepository(retrofitService)
-    }
+//    override val policeRepository: PoliceRepository by lazy {
+//        DefaultPoliceRepository(retrofitService)
+//    }
 //
 //    override val policeViewModel: PoliceViewModel =
 //            viewModel(factory = PoliceViewModel.Factory)
