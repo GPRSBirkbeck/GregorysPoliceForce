@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -45,15 +46,7 @@ fun ForceDetailScreen(modifier: Modifier = Modifier, policeUiState: PoliceUiStat
 @Composable
 fun ForceDetailScreenLayout(chosenForce: ForceDetail,
                      modifier: Modifier = Modifier){
-    Column {
-//        NextStep(
-//            name = "YOU DID IT.",
-//            startText = "Explore the Police with me below!",
-//            modifier = modifier.align(Alignment.CenterHorizontally)
-//
-//        )
         ForceDetailCard(forceDetail = chosenForce)
-    }
 }
 
 @Composable
@@ -123,7 +116,7 @@ fun ForceDetailCard(forceDetail: ForceDetail, modifier: Modifier = Modifier) {
                 }
             }
             Text(
-                text = "Engagement methods",
+                text = stringResource(R.string.engagement_method),
                 modifier = Modifier.padding(8.dp),
                 style = MaterialTheme.typography.h6
             )

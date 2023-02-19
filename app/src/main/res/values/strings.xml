@@ -5,4 +5,6 @@
     <string name="loading">Loading</string>
     <string name="loading_failed">Failed to load the Police</string>
     <string name="engagement_methods">Engagement Methods</string>
+    <string name="engagement_method">Engagement methods</string>
+    <string name="police_force_details">Police Force Details</string>
 </resources>
