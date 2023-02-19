@@ -4,11 +4,10 @@ import com.example.gregoryspoliceforce.model.Force
 import com.example.gregoryspoliceforce.model.ForceDetail
 
 data class PoliceUiState(
-    val selectedPoliceForce: String = "", //TODO see if we need this
-    val forceList: List<Force> = ArrayList<Force>(),
+    val selectedPoliceForce: String = "",
+    val forceList: List<Force> = ArrayList<Force>()
 )
 
-//TODO merge these once you've read up on sealed interfaces
 sealed interface ForceListUiState {
     data class Success(val forceList: List<Force>) : ForceListUiState
     object Error : ForceListUiState
