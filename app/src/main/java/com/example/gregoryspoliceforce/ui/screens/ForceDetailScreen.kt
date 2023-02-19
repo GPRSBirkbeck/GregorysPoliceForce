@@ -1,5 +1,6 @@
 package com.example.gregoryspoliceforce.ui.screens
 
+import android.text.Html
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -17,6 +18,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.text.HtmlCompat
 import com.example.gregoryspoliceforce.R
 import com.example.gregoryspoliceforce.data.DetailPoliceOnlineUiState
 import com.example.gregoryspoliceforce.data.PoliceOnlineUiState
@@ -99,7 +101,7 @@ fun ForceDetailCard(forceDetail: ForceDetail, modifier: Modifier = Modifier) {
                 )
             }
             forceDetail.description?.let {
-                Text(text = it,
+                Text(text = HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_LEGACY).toString(),
                     modifier = Modifier.padding(8.dp),
                     style = MaterialTheme.typography.body1
                 )
