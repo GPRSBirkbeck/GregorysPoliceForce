@@ -6,20 +6,22 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.example.gregoryspoliceforce.GregorysPoliceForceApplication
 import com.example.gregoryspoliceforce.data.*
 import com.example.gregoryspoliceforce.model.Force
 import com.example.gregoryspoliceforce.model.ForceDetail
-import com.example.gregoryspoliceforce.network.PoliceApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.io.IOException
 
-class PoliceViewModel : ViewModel() {
-
-
+class PoliceViewModel(private val policeRepository: PoliceRepository) : ViewModel() {
 
     private val _uiState = MutableStateFlow(PoliceUiState())
 
@@ -30,19 +32,11 @@ class PoliceViewModel : ViewModel() {
         private set
     private lateinit var selectedPoliceForce: String
 
-    private lateinit var forceList: List<Force>
-
-//    private fun getForceList(): List<Force> {
-//        forceList = MockDataSource().LoadMockPoliceSource()
-//        return MockDataSource().LoadMockPoliceSource()
-//    }
-
     private fun getOnlineForceList(): List<Force> {
         var listResult: List<Force> = ArrayList<Force>()
         viewModelScope.launch {
             try {
-                val policeRepoitory = DefaultPoliceRepository()
-                listResult = policeRepoitory.getForceList()
+                listResult = policeRepository.getForceList()
                 policeOnlineUiState = PoliceOnlineUiState.Success(onlineForceList = listResult)
                 Log.d(TAG, "getOnlineForceList: $listResult")
 
@@ -57,12 +51,7 @@ class PoliceViewModel : ViewModel() {
     private fun getSpecificOnlineForce() {
         viewModelScope.launch {
             try {
-                //TODO uncomment
-//            val listResult = PoliceApi.retrofitService.getForceList()
-//            _uiState.value = PoliceUiState(onlineForceList = listResult)
-//            Log.d(TAG, "getOnlineForceList: $listResult")
-                val policeRepoitory = DefaultPoliceRepository()
-                val forceDetail = policeRepoitory.getSpecificForce()
+                val forceDetail = policeRepository.getSpecificForce()
                 detailPoliceOnlineUiState = DetailPoliceOnlineUiState.Success(onlineForceDetail = forceDetail)
                 Log.d(TAG, "getOnlineForceDetail: $detailPoliceOnlineUiState")
 
@@ -84,4 +73,13 @@ class PoliceViewModel : ViewModel() {
         getOnlineForceList()
     }
 
+    companion object {
+        val Factory: ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                val application = (this[APPLICATION_KEY] as GregorysPoliceForceApplication)
+                val policeRepository = application.container.policeRepository
+                PoliceViewModel(policeRepository = policeRepository)
+            }
+        }
+    }
 }

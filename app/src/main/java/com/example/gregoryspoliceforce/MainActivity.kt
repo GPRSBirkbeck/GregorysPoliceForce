@@ -3,6 +3,8 @@ package com.example.gregoryspoliceforce
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.gregoryspoliceforce.ui.PoliceViewModel
 import com.example.gregoryspoliceforce.ui.theme.GregorysPoliceForceTheme
 
 class MainActivity : ComponentActivity() {
@@ -10,7 +12,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             GregorysPoliceForceTheme {
-                PoliceApp()
+                val viewModel: PoliceViewModel =
+                    viewModel(factory = PoliceViewModel.Factory)
+                PoliceApp(viewModel)
             }
         }
     }

@@ -55,7 +55,7 @@ fun PoliceAppBar(
 }
 
 @Composable
-fun PoliceApp(modifier: Modifier = Modifier, viewModel: PoliceViewModel = viewModel()) {
+fun PoliceApp( viewModel: PoliceViewModel, modifier: Modifier = Modifier) {
     // TODO: Create NavController
     val navController = rememberNavController()
 

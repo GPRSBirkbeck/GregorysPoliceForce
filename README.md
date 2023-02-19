@@ -3,11 +3,12 @@
 
 Todo List
 ---------------
-1. Create App in Compose
-3. Bring in DI
-4. if there's no value for an engagement method, hide it
-5. make method links clickable
-6. Extract Strings
+1. Create App in Compose 
+2. DI with Hilt
+3. if there's no value for an engagement method, hide it
+4. make method links clickable
+5. Extract Strings
+6. DI testing: https://developer.android.com/codelabs/basic-android-kotlin-compose-add-repository?continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-compose-unit-5-pathway-2%23codelab-https%3A%2F%2Fdeveloper.android.com%2Fcodelabs%2Fbasic-android-kotlin-compose-add-repository#6
 7. WorkManager
 8. Migrate common UI to a common UI file
 9. Migrate MVVM to MVI
