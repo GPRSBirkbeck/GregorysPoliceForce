@@ -1,16 +1,13 @@
 package com.example.gregoryspoliceforce.network
-import com.example.gregoryspoliceforce.data.PoliceRepository
-import com.example.gregoryspoliceforce.model.Force
-import com.example.gregoryspoliceforce.model.ForceDetail
+import com.example.gregoryspoliceforce.datamodel.Force
+import com.example.gregoryspoliceforce.datamodel.ForceDetail
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import dagger.Provides
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType
 import retrofit2.http.Path
-import retrofit2.http.Query
 import javax.inject.Inject
 
 private const val BASE_URL =
@@ -22,10 +19,20 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .build()
 
-class PoliceApi @Inject constructor() {
+open class PoliceApi @Inject constructor(): PoliceApiService {
     val retrofitService: PoliceApiService by lazy {
         retrofit.create(PoliceApiService::class.java)
     }
+
+    override suspend fun getForceList(): List<Force> {
+        return retrofitService.getForceList()
+    }
+
+    override suspend fun getSpecificForce(id: String): ForceDetail {
+        return retrofitService.getSpecificForce(id = id)
+    }
+
+
 }
 
 interface PoliceApiService {

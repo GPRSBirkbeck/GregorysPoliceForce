@@ -11,16 +11,16 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.example.gregoryspoliceforce.data.ForceListUiState
-import com.example.gregoryspoliceforce.data.PoliceUiState
-import com.example.gregoryspoliceforce.model.Force
-import com.example.gregoryspoliceforce.ui.PoliceViewModel
+import com.example.gregoryspoliceforce.datamodel.Force
 import androidx.compose.ui.res.stringResource
 import com.example.gregoryspoliceforce.R
 import com.example.gregoryspoliceforce.ui.components.ErrorScreen
 import com.example.gregoryspoliceforce.ui.components.LoadingScreen
 
+const val FORCE_LIST_TEST_TAG = "force_list_test_tag"
 @Composable
 fun ForceListScreen(
     modifier: Modifier = Modifier,
@@ -40,9 +40,10 @@ fun ForceListScreen(
 @Composable
 fun ForceListScreenLayout(
     forceList: List<Force>,
-    onPoliceListClick: (String) -> Unit
+    onPoliceListClick: (String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    Column {
+    Column{
         Text(
             text = stringResource(R.string.our_forces),
             modifier = Modifier.padding(2.dp),
@@ -89,7 +90,7 @@ private fun ForceList(
     modifier: Modifier = Modifier,
     onPoliceListClick: (String) -> Unit
 ) {
-    LazyColumn {
+    LazyColumn(modifier = Modifier.testTag(FORCE_LIST_TEST_TAG))  {
         items(forceList) { force ->
             ForceCard(force = force, onPoliceListClick = onPoliceListClick)
             modifier.clickable { force.id?.let { onPoliceListClick(it) } }

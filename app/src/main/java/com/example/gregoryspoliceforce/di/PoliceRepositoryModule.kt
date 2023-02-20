@@ -16,6 +16,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(ViewModelComponent::class)
 abstract class PoliceRepositoryModule{
+
         @Binds
         abstract fun bindPoliceRepository(impl: DefaultPoliceRepository): PoliceRepository
 }

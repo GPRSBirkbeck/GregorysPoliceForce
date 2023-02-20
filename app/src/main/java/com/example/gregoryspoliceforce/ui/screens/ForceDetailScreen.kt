@@ -9,17 +9,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.text.HtmlCompat
 import com.example.gregoryspoliceforce.R
 import com.example.gregoryspoliceforce.data.ForceDetailUiState
-import com.example.gregoryspoliceforce.data.PoliceUiState
-import com.example.gregoryspoliceforce.model.EngagementMethod
-import com.example.gregoryspoliceforce.model.ForceDetail
-import com.example.gregoryspoliceforce.ui.PoliceViewModel
+import com.example.gregoryspoliceforce.datamodel.EngagementMethod
+import com.example.gregoryspoliceforce.datamodel.ForceDetail
 import com.example.gregoryspoliceforce.ui.components.ErrorScreen
 import com.example.gregoryspoliceforce.ui.components.LoadingScreen
+
+const val FORCE_DETAIL_NAME_TAG = "force_list_item_tag"
 
 @Composable
 fun ForceDetailScreen(
@@ -52,7 +53,7 @@ fun ForceDetailCard(forceDetail: ForceDetail, modifier: Modifier = Modifier) {
                     forceDetail.name?.let {
                         Text(
                             text = stringResource(R.string.selected_force),
-                            modifier = Modifier.padding(16.dp),
+                            modifier = Modifier.padding(16.dp).testTag(FORCE_DETAIL_NAME_TAG),
                             style = MaterialTheme.typography.h6
                         )
                         Text(

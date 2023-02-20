@@ -15,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.gregoryspoliceforce.ui.PoliceViewModel
 import com.example.gregoryspoliceforce.ui.screens.ForceDetailScreen
@@ -54,8 +55,7 @@ fun PoliceAppBar(
 }
 
 @Composable
-fun PoliceApp(viewModel: PoliceViewModel, modifier: Modifier = Modifier) {
-    val navController = rememberNavController()
+fun PoliceApp(viewModel: PoliceViewModel, modifier: Modifier = Modifier, navController: NavHostController = rememberNavController()) {
 
     val backStackEntry by navController.currentBackStackEntryAsState()
 

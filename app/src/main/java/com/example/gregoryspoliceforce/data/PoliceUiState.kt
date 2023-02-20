@@ -1,12 +1,8 @@
 package com.example.gregoryspoliceforce.data
 
-import com.example.gregoryspoliceforce.model.Force
-import com.example.gregoryspoliceforce.model.ForceDetail
+import com.example.gregoryspoliceforce.datamodel.Force
+import com.example.gregoryspoliceforce.datamodel.ForceDetail
 
-data class PoliceUiState(
-    val selectedPoliceForce: String = "",
-    val forceList: List<Force> = ArrayList<Force>()
-)
 
 sealed interface ForceListUiState {
     data class Success(val forceList: List<Force>) : ForceListUiState
