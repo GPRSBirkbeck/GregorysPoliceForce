@@ -1,4 +1,4 @@
-package com.example.gregoryspoliceforce.model
+package com.example.gregoryspoliceforce.data.model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

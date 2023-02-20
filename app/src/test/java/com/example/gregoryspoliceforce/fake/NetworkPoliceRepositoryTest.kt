@@ -1,7 +1,6 @@
 package com.example.gregoryspoliceforce.fake
 
-import com.example.gregoryspoliceforce.data.DefaultPoliceRepository
-import com.example.gregoryspoliceforce.data.PoliceRepository
+import com.example.gregoryspoliceforce.state.DefaultPoliceRepository
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test

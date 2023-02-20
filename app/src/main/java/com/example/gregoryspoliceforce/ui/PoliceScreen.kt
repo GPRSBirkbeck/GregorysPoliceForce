@@ -1,4 +1,4 @@
-package com.example.gregoryspoliceforce
+package com.example.gregoryspoliceforce.ui
 
 import android.content.ContentValues.TAG
 import android.util.Log
@@ -10,6 +10,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.NavHost
@@ -21,6 +22,9 @@ import com.example.gregoryspoliceforce.ui.PoliceViewModel
 import com.example.gregoryspoliceforce.ui.screens.ForceDetailScreen
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.gregoryspoliceforce.ui.screens.ForceListScreen
+import com.example.gregoryspoliceforce.R
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 enum class PoliceScreen(@StringRes val title: Int) {
     Home(title = R.string.app_name),
@@ -56,6 +60,7 @@ fun PoliceAppBar(
 
 @Composable
 fun PoliceApp(viewModel: PoliceViewModel, modifier: Modifier = Modifier, navController: NavHostController = rememberNavController()) {
+    val coroutineScope = rememberCoroutineScope()
 
     val backStackEntry by navController.currentBackStackEntryAsState()
 
@@ -80,9 +85,11 @@ fun PoliceApp(viewModel: PoliceViewModel, modifier: Modifier = Modifier, navCont
             composable(route = PoliceScreen.Home.name) {
                 ForceListScreen(
                     onPoliceListClick = {
-                        viewModel.setPoliceForce(it)
-                        Log.d(TAG, "PoliceApp: Police Force set to $it")
-                        navController.navigate(PoliceScreen.Detail.name)
+                        coroutineScope.launch {
+                            viewModel.intentChannel.send(PoliceIntent.OnPoliceListClick(it))
+                            Log.d(TAG, "PoliceApp: Police Force set to $it")
+                            navController.navigate(PoliceScreen.Detail.name)
+                        }
                     }, forceListUiState = viewModel.forceListUiState
                 )
             }

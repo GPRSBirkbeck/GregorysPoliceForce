@@ -1,9 +1,9 @@
 package com.example.gregoryspoliceforce.fake
 
-import com.example.gregoryspoliceforce.data.ForceDetailUiState
-import com.example.gregoryspoliceforce.data.ForceListUiState
-import com.example.gregoryspoliceforce.data.PoliceRepository
+import com.example.gregoryspoliceforce.ui.state.ForceDetailUiState
+import com.example.gregoryspoliceforce.ui.state.ForceListUiState
 import com.example.gregoryspoliceforce.rules.TestDispatcherRule
+import com.example.gregoryspoliceforce.ui.PoliceIntent
 import com.example.gregoryspoliceforce.ui.PoliceViewModel
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
@@ -35,7 +35,7 @@ class PoliceViewModelTest {
             val policeViewModel = PoliceViewModel(
                 policeRepository = FakeNetworkPoliceRepository()
             )
-            policeViewModel.setPoliceForce("leicestershire")
+            policeViewModel.intentChannel.send(PoliceIntent.OnPoliceListClick("leicester"))
             assertEquals(
                 ForceDetailUiState.Success(FakeDataSource.fakeForceDetail),
                 policeViewModel.forceDetailUiState

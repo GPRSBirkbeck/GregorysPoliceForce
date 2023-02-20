@@ -1,8 +1,8 @@
 package com.example.gregoryspoliceforce.fake
 
-import com.example.gregoryspoliceforce.datamodel.EngagementMethod
-import com.example.gregoryspoliceforce.datamodel.Force
-import com.example.gregoryspoliceforce.datamodel.ForceDetail
+import com.example.gregoryspoliceforce.data.model.EngagementMethod
+import com.example.gregoryspoliceforce.data.model.Force
+import com.example.gregoryspoliceforce.data.model.ForceDetail
 
 object FakeDataSource {
     val fakeForceList = listOf<Force>(

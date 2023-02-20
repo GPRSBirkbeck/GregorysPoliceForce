@@ -14,9 +14,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.text.HtmlCompat
 import com.example.gregoryspoliceforce.R
-import com.example.gregoryspoliceforce.data.ForceDetailUiState
-import com.example.gregoryspoliceforce.datamodel.EngagementMethod
-import com.example.gregoryspoliceforce.datamodel.ForceDetail
+import com.example.gregoryspoliceforce.ui.state.ForceDetailUiState
+import com.example.gregoryspoliceforce.data.model.EngagementMethod
+import com.example.gregoryspoliceforce.data.model.ForceDetail
 import com.example.gregoryspoliceforce.ui.components.ErrorScreen
 import com.example.gregoryspoliceforce.ui.components.LoadingScreen
 

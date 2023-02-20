@@ -13,8 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.example.gregoryspoliceforce.data.ForceListUiState
-import com.example.gregoryspoliceforce.datamodel.Force
+import com.example.gregoryspoliceforce.ui.state.ForceListUiState
+import com.example.gregoryspoliceforce.data.model.Force
 import androidx.compose.ui.res.stringResource
 import com.example.gregoryspoliceforce.R
 import com.example.gregoryspoliceforce.ui.components.ErrorScreen

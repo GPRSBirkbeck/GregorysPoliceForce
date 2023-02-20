@@ -1,7 +1,7 @@
-package com.example.gregoryspoliceforce.data
+package com.example.gregoryspoliceforce.ui.state
 
-import com.example.gregoryspoliceforce.datamodel.Force
-import com.example.gregoryspoliceforce.datamodel.ForceDetail
+import com.example.gregoryspoliceforce.data.model.Force
+import com.example.gregoryspoliceforce.data.model.ForceDetail
 
 
 sealed interface ForceListUiState {

@@ -1,4 +1,4 @@
-package com.example.gregoryspoliceforce
+package com.example.gregoryspoliceforce.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
