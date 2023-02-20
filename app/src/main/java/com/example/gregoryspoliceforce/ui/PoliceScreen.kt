@@ -1,35 +1,28 @@
 package com.example.gregoryspoliceforce.ui
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.gregoryspoliceforce.ui.PoliceViewModel
 import com.example.gregoryspoliceforce.ui.screens.ForceDetailScreen
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.gregoryspoliceforce.ui.screens.ForceListScreen
 import com.example.gregoryspoliceforce.R
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 enum class PoliceScreen(@StringRes val title: Int) {
     Home(title = R.string.app_name),
     Detail(title = R.string.force_detail_screen)
-    //TODO add officers?
 }
 
 /**
@@ -37,10 +30,10 @@ enum class PoliceScreen(@StringRes val title: Int) {
  */
 @Composable
 fun PoliceAppBar(
+    modifier: Modifier = Modifier,
     currentScreen: PoliceScreen,
     canNavigateBack: Boolean,
     navigateUp: () -> Unit = {},
-    modifier: Modifier = Modifier
 ) {
     TopAppBar(
         title = { Text(stringResource(currentScreen.title)) },
@@ -87,14 +80,12 @@ fun PoliceApp(viewModel: PoliceViewModel, modifier: Modifier = Modifier, navCont
                     onPoliceListClick = {
                         coroutineScope.launch {
                             viewModel.intentChannel.send(PoliceIntent.OnPoliceListClick(it))
-                            Log.d(TAG, "PoliceApp: Police Force set to $it")
                             navController.navigate(PoliceScreen.Detail.name)
                         }
                     }, forceListUiState = viewModel.forceListUiState
                 )
             }
             composable(route = PoliceScreen.Detail.name) {
-                val context = LocalContext.current
                 ForceDetailScreen(
                     forceDetailUiState = viewModel.forceDetailUiState
                 )

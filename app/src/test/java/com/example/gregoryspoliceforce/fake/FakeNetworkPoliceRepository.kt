@@ -4,7 +4,7 @@ import com.example.gregoryspoliceforce.state.PoliceRepository
 import com.example.gregoryspoliceforce.data.model.Force
 import com.example.gregoryspoliceforce.data.model.ForceDetail
 
-class FakeNetworkPoliceRepository: PoliceRepository {
+class FakeNetworkPoliceRepository : PoliceRepository {
     override suspend fun getForceList(): List<Force> {
         return FakeDataSource.fakeForceList
     }

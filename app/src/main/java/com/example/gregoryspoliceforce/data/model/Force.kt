@@ -1,4 +1,5 @@
 package com.example.gregoryspoliceforce.data.model
+
 import kotlinx.serialization.Serializable
 
 @Serializable

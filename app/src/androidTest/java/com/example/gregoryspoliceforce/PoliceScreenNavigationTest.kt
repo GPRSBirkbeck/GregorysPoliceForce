@@ -7,6 +7,8 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.gregoryspoliceforce.ui.PoliceApp
+import com.example.gregoryspoliceforce.ui.PoliceScreen
 import com.example.gregoryspoliceforce.ui.PoliceViewModel
 import com.example.gregoryspoliceforce.ui.screens.FORCE_DETAIL_NAME_TAG
 import com.example.gregoryspoliceforce.ui.screens.FORCE_LIST_TEST_TAG
@@ -29,8 +31,7 @@ class PoliceScreenNavigationTest {
                 policeRepository = FakeNetworkPoliceRepository()
             )
 
-            navController =
-                TestNavHostController(LocalContext.current)
+            navController = TestNavHostController(LocalContext.current)
             navController.navigatorProvider.addNavigator(
                 ComposeNavigator()
             )
@@ -51,20 +52,13 @@ class PoliceScreenNavigationTest {
 
     @Test
     fun policeNavHost_clickOnFirst_navigatesToForceDetailScreen() {
-        composeTestRule.onNodeWithTag(FORCE_LIST_TEST_TAG)
-            .onChildren()
-            .onFirst()
-            .performClick()
+        composeTestRule.onNodeWithTag(FORCE_LIST_TEST_TAG).onChildren().onFirst().performClick()
         navController.assertCurrentRouteName(PoliceScreen.Detail.name)
     }
 
     @Test
     fun policeNavHost_clickOnFirst_navigatesToForceDetailScreenAndScreenIsPopulated() {
-        composeTestRule.onNodeWithTag(FORCE_LIST_TEST_TAG)
-            .onChildren()
-            .onFirst()
-            .performClick()
-        composeTestRule.onNodeWithTag(FORCE_DETAIL_NAME_TAG)
-            .assertExists()
+        composeTestRule.onNodeWithTag(FORCE_LIST_TEST_TAG).onChildren().onFirst().performClick()
+        composeTestRule.onNodeWithTag(FORCE_DETAIL_NAME_TAG).assertExists()
     }
 }

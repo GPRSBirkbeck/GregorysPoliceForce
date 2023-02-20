@@ -6,13 +6,13 @@ import com.example.gregoryspoliceforce.data.network.PoliceApi
 import javax.inject.Inject
 
 
-//@Component(modules = PoliceRepositoryModule.class)
 interface PoliceRepository {
     suspend fun getForceList(): List<Force>
     suspend fun getSpecificForce(id: String): ForceDetail
 }
 
-class DefaultPoliceRepository @Inject constructor(private val policeApi: PoliceApi
+class DefaultPoliceRepository @Inject constructor(
+    private val policeApi: PoliceApi
 ) : PoliceRepository {
     override suspend fun getForceList(): List<Force> {
         return policeApi.getForceList()

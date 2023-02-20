@@ -53,7 +53,9 @@ fun ForceDetailCard(forceDetail: ForceDetail, modifier: Modifier = Modifier) {
                     forceDetail.name?.let {
                         Text(
                             text = stringResource(R.string.selected_force),
-                            modifier = Modifier.padding(16.dp).testTag(FORCE_DETAIL_NAME_TAG),
+                            modifier = Modifier
+                                .padding(16.dp)
+                                .testTag(FORCE_DETAIL_NAME_TAG),
                             style = MaterialTheme.typography.h6
                         )
                         Text(
@@ -70,7 +72,8 @@ fun ForceDetailCard(forceDetail: ForceDetail, modifier: Modifier = Modifier) {
                         )
                     }
                     forceDetail.url?.let {
-                        Text(text = stringResource(R.string.website),
+                        Text(
+                            text = stringResource(R.string.website),
                             modifier = Modifier.padding(8.dp),
                             style = MaterialTheme.typography.h6
                         )

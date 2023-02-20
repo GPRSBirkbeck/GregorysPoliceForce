@@ -9,7 +9,7 @@ import dagger.hilt.android.components.ViewModelComponent
 
 @Module
 @InstallIn(ViewModelComponent::class)
-abstract class PoliceRepositoryModule{
-        @Binds
-        abstract fun bindPoliceRepository(impl: DefaultPoliceRepository): PoliceRepository
+abstract class PoliceRepositoryModule {
+    @Binds
+    abstract fun bindPoliceRepository(impl: DefaultPoliceRepository): PoliceRepository
 }

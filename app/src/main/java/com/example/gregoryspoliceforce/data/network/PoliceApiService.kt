@@ -1,4 +1,5 @@
 package com.example.gregoryspoliceforce.data.network
+
 import com.example.gregoryspoliceforce.data.model.Force
 import com.example.gregoryspoliceforce.data.model.ForceDetail
 import retrofit2.Retrofit
@@ -10,17 +11,15 @@ import okhttp3.MediaType
 import retrofit2.http.Path
 import javax.inject.Inject
 
-private const val BASE_URL =
-    "https://data.police.uk/api/"
+private const val BASE_URL = "https://data.police.uk/api/"
 
 @OptIn(ExperimentalSerializationApi::class)
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(Json.asConverterFactory(MediaType.get("application/json")))
-    .baseUrl(BASE_URL)
-    .build()
+    .baseUrl(BASE_URL).build()
 
-open class PoliceApi @Inject constructor(): PoliceApiService {
-    val retrofitService: PoliceApiService by lazy {
+open class PoliceApi @Inject constructor() : PoliceApiService {
+    private val retrofitService: PoliceApiService by lazy {
         retrofit.create(PoliceApiService::class.java)
     }
 

@@ -34,7 +34,9 @@ fun LoadingScreen(modifier: Modifier = Modifier) {
 fun ErrorScreen(modifier: Modifier = Modifier) {
     Box(
         contentAlignment = Alignment.Center,
-        modifier = modifier.fillMaxSize().testTag(ERROR_TAG)
+        modifier = modifier
+            .fillMaxSize()
+            .testTag(ERROR_TAG)
     ) {
         Text(stringResource(R.string.loading_failed))
     }

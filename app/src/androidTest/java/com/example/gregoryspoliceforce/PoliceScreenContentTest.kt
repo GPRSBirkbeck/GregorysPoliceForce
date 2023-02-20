@@ -9,10 +9,10 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.gregoryspoliceforce.ui.PoliceApp
 import com.example.gregoryspoliceforce.ui.PoliceViewModel
 import com.example.gregoryspoliceforce.ui.components.ERROR_TAG
 import com.example.gregoryspoliceforce.ui.screens.FORCE_LIST_TEST_TAG
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -31,17 +31,14 @@ class PoliceScreenContentTest {
                 policeRepository = FakeNetworkPoliceRepository()
             )
 
-            navController =
-                TestNavHostController(LocalContext.current)
+            navController = TestNavHostController(LocalContext.current)
             navController.navigatorProvider.addNavigator(
                 ComposeNavigator()
             )
             PoliceApp(navController = navController, viewModel = policeViewModel)
         }
 
-        composeTestRule.onNodeWithTag(FORCE_LIST_TEST_TAG)
-            .onChildren()
-            .assertCountEquals(4)
+        composeTestRule.onNodeWithTag(FORCE_LIST_TEST_TAG).onChildren().assertCountEquals(4)
     }
 
     @Test
@@ -51,15 +48,13 @@ class PoliceScreenContentTest {
                 policeRepository = FakeFailedNetworkPoliceRepository()
             )
 
-            navController =
-                TestNavHostController(LocalContext.current)
+            navController = TestNavHostController(LocalContext.current)
             navController.navigatorProvider.addNavigator(
                 ComposeNavigator()
             )
             PoliceApp(navController = navController, viewModel = policeViewModel)
         }
-        composeTestRule.onNodeWithTag(ERROR_TAG)
-            .assertExists()
+        composeTestRule.onNodeWithTag(ERROR_TAG).assertExists()
     }
 
 }

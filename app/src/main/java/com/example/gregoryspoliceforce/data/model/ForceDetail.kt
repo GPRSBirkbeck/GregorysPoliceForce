@@ -1,4 +1,5 @@
 package com.example.gregoryspoliceforce.data.model
+
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -6,8 +7,7 @@ import kotlinx.serialization.Serializable
 data class ForceDetail(
     val description: String? = null,
     val url: String? = null,
-    @SerialName(value = "engagement_methods")
-    val engagementMethods: List<EngagementMethod>,
+    @SerialName(value = "engagement_methods") val engagementMethods: List<EngagementMethod>,
     val telephone: String? = null,
     val id: String? = null,
     val name: String? = null

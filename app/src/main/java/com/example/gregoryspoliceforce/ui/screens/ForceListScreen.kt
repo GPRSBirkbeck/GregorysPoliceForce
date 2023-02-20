@@ -21,6 +21,7 @@ import com.example.gregoryspoliceforce.ui.components.ErrorScreen
 import com.example.gregoryspoliceforce.ui.components.LoadingScreen
 
 const val FORCE_LIST_TEST_TAG = "force_list_test_tag"
+
 @Composable
 fun ForceListScreen(
     modifier: Modifier = Modifier,
@@ -41,9 +42,8 @@ fun ForceListScreen(
 fun ForceListScreenLayout(
     forceList: List<Force>,
     onPoliceListClick: (String) -> Unit,
-    modifier: Modifier = Modifier
 ) {
-    Column{
+    Column {
         Text(
             text = stringResource(R.string.our_forces),
             modifier = Modifier.padding(2.dp),
@@ -60,15 +60,6 @@ fun ForceCard(force: Force, modifier: Modifier = Modifier, onPoliceListClick: (S
             .padding(8.dp), elevation = 4.dp
     ) {
         Column {
-            //TODO add fun Images
-//            Image(
-//                painter = painterResource(affirmation.imageResourceId),
-//                contentDescription = stringResource(affirmation.stringResourceId),
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .height(194.dp),
-//                contentScale = ContentScale.Crop
-//            )
             Surface(modifier = modifier.clickable { force.id?.let { onPoliceListClick(it) } }) {
                 force.name?.let {
                     Text(
@@ -90,7 +81,7 @@ private fun ForceList(
     modifier: Modifier = Modifier,
     onPoliceListClick: (String) -> Unit
 ) {
-    LazyColumn(modifier = Modifier.testTag(FORCE_LIST_TEST_TAG))  {
+    LazyColumn(modifier = Modifier.testTag(FORCE_LIST_TEST_TAG)) {
         items(forceList) { force ->
             ForceCard(force = force, onPoliceListClick = onPoliceListClick)
             modifier.clickable { force.id?.let { onPoliceListClick(it) } }

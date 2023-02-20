@@ -5,7 +5,7 @@ import com.example.gregoryspoliceforce.data.model.Force
 import com.example.gregoryspoliceforce.data.model.ForceDetail
 
 object FakeDataSource {
-    val fakeForceList = listOf<Force>(
+    val fakeForceList = listOf(
         Force("london-met", "London Metropolitan"),
         Force("leicester", "Leicester"),
         Force("cams", "Cambridge"),

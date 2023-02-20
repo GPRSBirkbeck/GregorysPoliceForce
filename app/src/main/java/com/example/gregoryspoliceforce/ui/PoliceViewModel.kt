@@ -13,11 +13,8 @@ import com.example.gregoryspoliceforce.ui.state.ForceDetailUiState
 import com.example.gregoryspoliceforce.ui.state.ForceListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import java.io.IOException
 import javax.inject.Inject
 
@@ -31,7 +28,7 @@ class PoliceViewModel @Inject constructor(private val policeRepository: PoliceRe
         private set
 
     private fun getForceList(): List<Force> {
-        var listResult: List<Force> = ArrayList<Force>()
+        var listResult: List<Force> = ArrayList()
         viewModelScope.launch {
             try {
                 listResult = policeRepository.getForceList()
