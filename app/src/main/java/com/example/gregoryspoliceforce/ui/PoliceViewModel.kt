@@ -52,7 +52,6 @@ class PoliceViewModel @Inject constructor(private val policeRepository: PoliceRe
             intentChannel.consumeAsFlow().collect {
                 when (it) {
                     is PoliceIntent.OnPoliceListClick -> getSpecificForceIntent(it.force)
-
                     else -> {//TODO add more if I get other actions }
                     }
                 }

@@ -57,7 +57,7 @@ fun ForceListScreenLayout(
 fun ForceCard(force: Force, modifier: Modifier = Modifier, onPoliceListClick: (String) -> Unit) {
     Card(
         modifier = modifier
-            .padding(8.dp), elevation = 4.dp
+            .padding(8.dp), elevation = 5.dp
     ) {
         Column {
             Surface(modifier = modifier.clickable { force.id?.let { onPoliceListClick(it) } }) {

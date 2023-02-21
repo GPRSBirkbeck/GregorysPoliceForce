@@ -21,7 +21,7 @@ import com.example.gregoryspoliceforce.R
 import kotlinx.coroutines.launch
 
 enum class PoliceScreen(@StringRes val title: Int) {
-    Home(title = R.string.app_name),
+    Home(title = R.string.force_list_screen),
     Detail(title = R.string.force_detail_screen)
 }
 
