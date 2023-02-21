@@ -106,7 +106,7 @@ fun ForceDetailCard(forceDetail: ForceDetail, modifier: Modifier = Modifier) {
             )
         }
         items(forceDetail.engagementMethods) { method ->
-            if (method.url != null) {
+            if (method.url != null && method.url.isNotEmpty()) {
                 EngagementCard(engagementMethod = method)
             }
         }
